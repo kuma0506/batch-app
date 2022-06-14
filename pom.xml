@@ -16,6 +16,7 @@
 	<properties>
 		<java.version>17</java.version>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -25,7 +26,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
+		
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -41,9 +42,14 @@
 			<artifactId>spring-batch-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+        <dependency>
+        	<groupId>org.postgresql</groupId>
+        	<artifactId>postgresql</artifactId>
+        </dependency>		
 	</dependencies>
 
 	<build>
+	    <defaultGoal>antrun:run</defaultGoal>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -57,8 +63,38 @@
 					</excludes>
 				</configuration>
 			</plugin>
+			<plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <dependencies>
+                  <dependency>
+                    <groupId>org.apache.ant</groupId>
+                    <artifactId>ant</artifactId>
+                    <version>1.10.12</version>
+                  </dependency>
+                </dependencies>
+                <configuration>
+                  <tasks>
+                    <property name="classpath" refid="maven.runtime.classpath" />
+                    <ant antfile="build.xml" target="init" inheritRefs="true" />
+                  </tasks>
+                </configuration>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+            </plugin>
 		</plugins>
+
+	    <pluginManagement>
+            <plugins>
+			    <plugin>
+                    <artifactId>maven-antrun-plugin</artifactId>
+                    <version>1.8</version>
+                    <inherited>false</inherited>
+				</plugin>
+		    </plugins>
+		</pluginManagement>
 	</build>
+
 	<repositories>
 		<repository>
 			<id>spring-milestones</id>

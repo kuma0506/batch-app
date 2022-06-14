@@ -1,0 +1,13 @@
+<project name="batch-app" >
+
+  <target name="init">
+    <antcall target="create-db" />
+  </target>
+
+  <target name="create-db">
+    <exec executable="docker-compose" failonerror="true">
+      <arg line="up -d --scale wait=0" />
+    </exec>
+  </target>
+
+</project>
