@@ -1,12 +1,15 @@
 version: "3.7"
+
 services:
   db:
-    image: postgis/postgis:12-3.2
+    image: postgres:14
+    container_name: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - db-store:/var/lib/postgresql/data
+      - ./script:/docker-entrypoint-initdb.d # この行を追加しただけ
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -d postgres -U postgres"]
-      interval: 10s
-      timeout: 10s
-      retries: 5
+      - POSTGRES_PASSWORD=passw0rd
+volumes:
+  db-store:

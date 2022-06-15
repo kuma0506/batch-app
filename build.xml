@@ -1,12 +1,23 @@
 <project name="batch-app" >
 
+  <condition property="mvn.cmd" value="${basedir}\mvnw.cmd" else="${basedir}\mvnw">
+    <os family="windows" />
+  </condition>
+  
   <target name="init">
-    <antcall target="create-db" />
+    <antcall target="init-db" />
+    <antcall target="install" />
   </target>
 
-  <target name="create-db">
+  <target name="init-db">
     <exec executable="docker-compose" failonerror="true">
       <arg line="up -d --scale wait=0" />
+    </exec>
+  </target>
+
+  <target name="install">
+    <exec executable="${mvn.cmd}" failonerror="true">
+      <arg line="clean install" />
     </exec>
   </target>
 
