@@ -7,9 +7,6 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - db-store:/var/lib/postgresql/data
-      - ./script:/docker-entrypoint-initdb.d # この行を追加しただけ
+      - ./sql:/docker-entrypoint-initdb.d # この行を追加しただけ
     environment:
       - POSTGRES_PASSWORD=passw0rd
-volumes:
-  db-store:
