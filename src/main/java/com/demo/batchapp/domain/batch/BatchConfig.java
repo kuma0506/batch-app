@@ -1,4 +1,4 @@
-package com.demo.batchapp.domain.batchTasklet;
+package com.demo.batchapp.domain.batch;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -9,13 +9,12 @@ import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import com.demo.batchapp.domain.batchTasklet.task.Task1;
-import com.demo.batchapp.domain.batchTasklet.task.Task2;
+import com.demo.batchapp.domain.batch.tasklet.Task1;
+import com.demo.batchapp.domain.batch.tasklet.Task2;
 
 @EnableBatchProcessing // バッチの基本機能提供
 @Configuration // Beanの生成(1つ以上のBeanが必要)
-public class BatchTaskletConfig {
+public class BatchConfig {
 
     @Autowired
     private StepBuilderFactory stepBuilderFactory;
@@ -42,5 +41,4 @@ public class BatchTaskletConfig {
                 .next(step2)
                 .build();
     }
-
 }

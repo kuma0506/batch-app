@@ -1,4 +1,4 @@
-package com.demo.batchapp.domain.batchTasklet.task;
+package com.demo.batchapp.domain.batch.tasklet;
 
 import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.scope.context.ChunkContext;
@@ -7,11 +7,11 @@ import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Task1 implements Tasklet {
+public class Task2 implements Tasklet {
 
     @Override
     public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
-        System.out.println("first-step");
+        System.out.println("second-step");
         return RepeatStatus.FINISHED;
     }
 
